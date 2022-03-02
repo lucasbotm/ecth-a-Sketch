@@ -1,0 +1,20 @@
+.divRow {
+    display:flex;
+    flex-direction:row;
+}
+
+.divGrid {
+    border: solid;
+    border-color: black;
+    border-width: 0.01px;
+}
+
+#divContainer {
+    display:flex;
+    flex-direction: column;
+    width:256px;
+    height:256px;
+    gap:0%;
+    margin:0;
+
+}
