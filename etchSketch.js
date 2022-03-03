@@ -12,7 +12,11 @@ let colCounter = 0;
 let rowWidth = divContainerWidth;
 let rowHeight = divContainerHeight/numberDivs;
 
-let containerWidth = rowWidth/numberDivs
+
+let borderContainer = 0.1;
+let containerWidth = rowWidth/numberDivs-borderContainer;
+let containerHeight = rowHeight - 2*borderContainer;
+
 
 
 console.log(divContainer.lastChild);
@@ -26,7 +30,9 @@ while (rowCounter <= 15){
     while (colCounter <= 15){
         let newDiv = document.createElement("div");
         newDiv.classList.add("divGrid");
-        newDiv.style.height = rowHeight.toString()+"px";
+        newDiv.style.border = "solid"
+        newDiv.style.borderWidth = "0.5px";
+        newDiv.style.height = containerHeight.toString()+"px";
         newDiv.style.width = containerWidth.toString()+"px";
         divContainer.lastChild.appendChild(newDiv);
         colCounter++;
