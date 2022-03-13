@@ -5,12 +5,18 @@ let divContainerInfo = divContainer.getBoundingClientRect();
 let divContainerHeight = divContainerInfo.height;
 let divContainerWidth = divContainerInfo.width;
 let divContainerBorder = parseFloat(getComputedStyle(divContainer).getPropertyValue("border"));
+let bodyElement = document.querySelector("body")
+let windowBackgroundColor = window.getComputedStyle(bodyElement).getPropertyValue("background-color");
+let colorSketch = "#CED8F7"
+let inputValuesGrid = [1,2,4,8,16,32,64]
+let indexSlider = document.getElementById("inputSlider").defaultValue;
+let sliderValue = inputValuesGrid[indexSlider];
+let valueSlider = document.getElementById("outputSlider")
 
-let numberDivs = 16;
-let rowCounter = 0;
-let colCounter = 0;
-
-function createGrid(numberDivs){
+function createGrid(value){
+    let numberDivs = value;
+    let rowCounter = 0;
+    let colCounter = 0;
 
     let rowWidth = divContainerWidth-2*divContainerBorder;
     let rowHeight = (divContainerHeight-2*divContainerBorder)/numberDivs;
@@ -33,9 +39,10 @@ function createGrid(numberDivs){
             newDiv.setAttribute("darken","none");
             newDiv.style.border = "solid";
             newDiv.style.borderWidth = borderContainer.toString()+"px";
+            newDiv.style.borderColor= "white";
             newDiv.style.height = containerHeight.toString()+"px";
             newDiv.style.width = containerWidth.toString()+"px";
-            newDiv.style.backgroundColor ="white";
+            newDiv.style.backgroundColor = windowBackgroundColor;
             divContainer.lastChild.appendChild(newDiv);
             colCounter++;
         }
@@ -43,22 +50,18 @@ function createGrid(numberDivs){
         rowCounter++;
     }
 }
-
-
 function clearGrid(){
     divsGrid.forEach(function(item){
-        item.style.backgroundColor ="white";
+        item.style.backgroundColor = windowBackgroundColor;
     })
 }
-
 function changeBackgroundColorBlack (input) {
-    input.target.style.backgroundColor = "black";
+    input.target.style.backgroundColor = colorSketch;
 }
-
 function changeBackgroundColorRainbow (input){
     let currentDiv = input.target;
     let backgroundColorDiv = input.target.style.backgroundColor;
-    if (backgroundColorDiv === "white" || backgroundColorDiv ==='black'){
+    if (backgroundColorDiv === windowBackgroundColor || backgroundColorDiv ===colorSketch || backgroundColorDiv==="black"){
         currentDiv.style.backgroundColor = randomHex();
         let actualColors = currentDiv.style.backgroundColor.slice(4,-1).split(',');
         let darkenChange = [actualColors[0]/10, actualColors[1]/10, actualColors[2]/10];
@@ -79,8 +82,6 @@ function changeBackgroundColorRainbow (input){
         }
     }
 }
-
-
 function randomHex(input) {
     // code by "Programming Bytes" - available on: https://www.educative.io/edpresso/how-to-generate-a-random-color-in-javascript
     let maxVal = 0xFFFFFF; // 16777215
@@ -90,7 +91,6 @@ function randomHex(input) {
     let randColor = randomNumber.padStart(6, 0);   
     return `#${randColor.toUpperCase()}`
 }
-
 function changeGridColor(clickEvent,colorMode="blackMode"){
     if (clickEvent){
         colorMode = clickEvent.target.className;
@@ -108,14 +108,29 @@ function changeGridColor(clickEvent,colorMode="blackMode"){
     }
 }
 
-createGrid(numberDivs);
+function removeGrid(){
+    while (divContainer.firstChild){
+        divContainer.removeChild(divContainer.lastChild)
+    }
+}
+
+createGrid(sliderValue);
 let divsGrid = document.querySelectorAll(".divGrid");
+valueSlider.textContent = sliderValue
 changeGridColor()
-
-
 
 document.querySelector(".clear").addEventListener("click",clearGrid);
 document.querySelector(".blackMode").addEventListener("click",changeGridColor,false)
 document.querySelector(".rainbowMode").addEventListener("click",changeGridColor,false)
+
+document.getElementById("inputSlider").addEventListener("change", function(e){
+    indexSlider = e.target.value
+    sliderValue = inputValuesGrid[indexSlider];
+    removeGrid()
+    createGrid(sliderValue)
+    valueSlider.textContent = sliderValue
+    divsGrid = document.querySelectorAll(".divGrid");
+    changeGridColor()
+});
 
 
