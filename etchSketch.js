@@ -109,13 +109,11 @@ function changeGridColor(clickEvent,colorMode="blackMode"){
         })
     }
 }
-
 function removeGrid(){
     while (divContainer.firstChild){
         divContainer.removeChild(divContainer.lastChild)
     }
 }
-
 function updateMouseCoordinate(input){
     let boundaryContainer = divContainer.getBoundingClientRect()
     let leftGridBoundary = boundaryContainer["left"]
@@ -134,26 +132,19 @@ function updateMouseCoordinate(input){
 
 createGrid(sliderValue);
 let divsGrid = document.querySelectorAll(".divGrid");
-valueSlider.textContent = sliderValue
+valueSlider.textContent = `${sliderValue} X ${sliderValue}`;
 changeGridColor()
-
-
-
 document.querySelector(".clear").addEventListener("click",clearGrid);
 document.querySelector(".blackMode").addEventListener("click",changeGridColor,false)
 document.querySelector(".rainbowMode").addEventListener("click",changeGridColor,false)
 document.addEventListener('mousemove', function(e){
-    // let textCoordinate = getElementById("textCoordinates")
     updateMouseCoordinate(e)});
- 
-
-
-document.getElementById("inputSlider").addEventListener("change", function(e){
+ document.getElementById("inputSlider").addEventListener("change", function(e){
     indexSlider = e.target.value
     sliderValue = inputValuesGrid[indexSlider];
     removeGrid()
     createGrid(sliderValue)
-    valueSlider.textContent = sliderValue
+    valueSlider.textContent = `${sliderValue} X ${sliderValue}`;
     divsGrid = document.querySelectorAll(".divGrid");
     changeGridColor()
 });

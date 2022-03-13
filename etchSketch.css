@@ -136,10 +136,10 @@ button{
   }
 
 #outputSlider{
-    color:white;
-    font-size: 10px;
-    left: 0;
-    right: 0;
+    color: rgb(206, 216, 247);
+    font-size: 8px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .coordinates{
