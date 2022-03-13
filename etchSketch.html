@@ -18,16 +18,23 @@
         <h1>Etch-a-Sketch</h1>
     </header>
     <main>
-        <div id="sidemenu">
-            <button type="button" class="clear">Clear</button>
-            <button type="button" class="blackMode">Blueprint</button>
-            <button type="button" class="rainbowMode">Rainbow</button>
-            <div class = "sliderContainer">
-                <input type="range" id="inputSlider" value="4" min="0" max="6" step="1">
-                <div id="outputSlider"></div>
-            </div>    
-         </div>
-        <div id="divContainer"></div>
+        <div class="interface">
+            <div id="sidemenu">
+                <button type="button" class="clear">Clear</button>
+                <button type="button" class="blackMode">Blueprint</button>
+                <button type="button" class="rainbowMode">Rainbow</button>
+                <div class = "sliderContainer">
+                    <input type="range" id="inputSlider" value="4" min="0" max="6" step="1">
+                    <div id="outputSlider"></div>
+                </div>    
+            </div>
+            <div class="grid">
+                <div id="divContainer"></div>
+                <div class="coordinates">
+                    <p id="textCoordinates">X:0.00 Y:0.00</p>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <a href="https://github.com/lucasbotm">

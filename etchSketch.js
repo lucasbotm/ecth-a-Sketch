@@ -7,11 +7,13 @@ let divContainerWidth = divContainerInfo.width;
 let divContainerBorder = parseFloat(getComputedStyle(divContainer).getPropertyValue("border"));
 let bodyElement = document.querySelector("body")
 let windowBackgroundColor = window.getComputedStyle(bodyElement).getPropertyValue("background-color");
-let colorSketch = "#CED8F7"
+// let colorSketch = "#CED8F7"
+let colorSketch = "rgb(206, 216, 247)"
 let inputValuesGrid = [1,2,4,8,16,32,64]
 let indexSlider = document.getElementById("inputSlider").defaultValue;
 let sliderValue = inputValuesGrid[indexSlider];
 let valueSlider = document.getElementById("outputSlider")
+let textCoordinate = document.getElementById("textCoordinates")
 
 function createGrid(value){
     let numberDivs = value;
@@ -61,7 +63,7 @@ function changeBackgroundColorBlack (input) {
 function changeBackgroundColorRainbow (input){
     let currentDiv = input.target;
     let backgroundColorDiv = input.target.style.backgroundColor;
-    if (backgroundColorDiv === windowBackgroundColor || backgroundColorDiv ===colorSketch || backgroundColorDiv==="black"){
+    if (backgroundColorDiv === windowBackgroundColor || backgroundColorDiv === colorSketch|| backgroundColorDiv==="black"){
         currentDiv.style.backgroundColor = randomHex();
         let actualColors = currentDiv.style.backgroundColor.slice(4,-1).split(',');
         let darkenChange = [actualColors[0]/10, actualColors[1]/10, actualColors[2]/10];
@@ -114,14 +116,37 @@ function removeGrid(){
     }
 }
 
+function updateMouseCoordinate(input){
+    let boundaryContainer = divContainer.getBoundingClientRect()
+    let leftGridBoundary = boundaryContainer["left"]
+    let rightGridBoundary = boundaryContainer["right"]
+    let topGridBoundary = boundaryContainer["top"];
+    let bottomGridBoundary = boundaryContainer["bottom"];
+    let mouseXCoordinate = input.clientX;
+    let mouseYCoordinate = input.clientY;
+    if (mouseXCoordinate>=leftGridBoundary
+        && mouseXCoordinate <= rightGridBoundary 
+        && mouseYCoordinate <= bottomGridBoundary 
+        && mouseYCoordinate >= topGridBoundary){ 
+                textCoordinate.innerText = `X: ${mouseXCoordinate} Y: ${mouseYCoordinate}`
+            } 
+}
+
 createGrid(sliderValue);
 let divsGrid = document.querySelectorAll(".divGrid");
 valueSlider.textContent = sliderValue
 changeGridColor()
 
+
+
 document.querySelector(".clear").addEventListener("click",clearGrid);
 document.querySelector(".blackMode").addEventListener("click",changeGridColor,false)
 document.querySelector(".rainbowMode").addEventListener("click",changeGridColor,false)
+document.addEventListener('mousemove', function(e){
+    // let textCoordinate = getElementById("textCoordinates")
+    updateMouseCoordinate(e)});
+ 
+
 
 document.getElementById("inputSlider").addEventListener("change", function(e){
     indexSlider = e.target.value

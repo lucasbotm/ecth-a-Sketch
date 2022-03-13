@@ -10,10 +10,14 @@ header {
     color: #CED8F7;
     border-bottom: 1px solid;
     margin: 0;
+    margin-bottom:20px;
     padding: 5px;
     text-align: center;
     text-shadow: -2px 2px #1f316e;
     font-weight: bold;
+    top: 0;
+    width: 100%;
+
 }
 
 header h1{
@@ -22,14 +26,22 @@ header h1{
 
 main {
     display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    margin: 20px 20px;
+    height:100%;
+    gap:0px;
+}
+
+.interface{
+    display: flex;
     flex-direction: row;
     justify-content:center;
-    align-items: center;
-    margin: 15px 0px;
     gap: 10px;
-    min-height: 70vh; 
-    left:auto;
-    width: 90%;
+    width: 100%;
+    right:auto;
+    margin-bottom:0;
 }
 
 #sidemenu {
@@ -67,7 +79,6 @@ button{
 #inputSlider {
     width: 50px;
 }
-
 
 .divRow {
     display:flex;
@@ -126,10 +137,33 @@ button{
 
 #outputSlider{
     color:white;
-    margin-top:0;
     font-size: 10px;
+    left: 0;
+    right: 0;
 }
 
+.coordinates{
+    text-align:end;
+    right:auto;
+    position: relative;
+
+}
+.coordinates p{
+    font-size:6px;
+    font-weight:bold;
+    color: rgb(206, 216, 247);
+    margin-top:0;
+    margin-bottom:20px;
+    padding:0;
+}
+
+footer{
+    bottom:0;
+    left:0;
+    flex-shrink: 0;
+    align-items: center;
+    width: 100%;
+}
 footer a {
     display: flex;
     flex-direction:row;
@@ -141,6 +175,4 @@ footer a {
     font-size:5px;
     font-weight:bold;
     text-decoration: none;
-    bottom:0;
 }
-
